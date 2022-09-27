@@ -25,14 +25,19 @@ class MovieList extends React.Component {
             style={{
               height: '65vh',
               padding: '4px',
-              overflow: 'hidden',
-              marginBottom: '16px',
+              overflow: 'scroll',
+              marginBottom: '2em',
             }}
           >
             <Card.Img
               variant="top"
               src={`${IMG_URL + movie.poster_path}`}
-              style={{ height: '45vh', objectFit: 'cover', padding: '8px' }}
+              style={{
+                width: '100%',
+                height: '45vh',
+                objectFit: 'cover',
+                padding: '8px',
+              }}
             />
             <Card.Body>
               <Card.Title>{movie.title}</Card.Title>
