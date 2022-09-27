@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from 'react';
+import store from '../Redux/store';
+import { getConst } from '../constants';
+import { actions } from '../Redux/actionCreator';
 
-import store from './store';
-import {actions} from './actionCreator';
-
-export default function ListMove(props){
+export default function SortButton(){
 
     //Watch the status of sort status (asc or desc), default is sort by asc
     const [sortTitleAsc,setSortTitleAsc] = useState(true)
@@ -12,11 +12,8 @@ export default function ListMove(props){
     const [sortAvgAsc,setSortAvgAsc] = useState(true)
 
     useEffect(()=>{
-
         store.subscribe(()=>{
             let curstate=store.getState().curState
-            
-
             switch(store.getState().actionType){
                 case "SORTAVG":
                     setSortAvgAsc(curstate)
@@ -34,46 +31,37 @@ export default function ListMove(props){
                     setSortDateAsc(curstate)
                     return null
                 default:
-                    return null
-        
-            }
-  
+                    return null       
+            }  
 
         })
 
     },[])
 
+    
+
     return(<>
     <div style={{margin:"10px"}}>
             <button onClick={()=>{
-                store.dispatch(actions.sortTitle(sortTitleAsc))
+                store.dispatch(actions.sortAction(getConst.SORTTITLE, sortTitleAsc))
             }}>Sort by title {sortTitleAsc?" ↑":" ↓"}</button>
 
 
             <button onClick={()=>{
-                store.dispatch(actions.sortDate(sortDateAsc))
+                store.dispatch(actions.sortAction(getConst.SORTDATE, sortDateAsc))
             }}>Sort by date{sortDateAsc?" ↑":" ↓"}</button>
 
             <button  onClick={()=>{
-                store.dispatch(actions.sortCount(sortCountAsc))
+                store.dispatch(actions.sortAction(getConst.SORTCOUNT, sortCountAsc))
             }}>Sort by vote count{sortCountAsc?" ↑":" ↓"}</button>
 
             <button onClick={()=>{
-                store.dispatch(actions.sortAvg(sortAvgAsc))
+                store.dispatch(actions.sortAction(getConst.SORTAVG, sortAvgAsc))
             }}>Sort by vote avg{sortAvgAsc?" ↑":" ↓"}</button>
         </div>
-     
-
-        {props.movieList.map((item=>
-        <div style={{border:'2px solid black',margin:"10px"}}>
-            <img alt='img' src={'https://image.tmdb.org/t/p/w1280'+item.poster_path} height={200} width={150}></img>
-            <div key={item.id}>{item.title}</div>
-            <div>relase Date: {item.release_date}</div>         
-            <div>Vote count: {item.vote_count}</div>
-            <div>Vote Average: {item.vote_average}</div>
-        </div>))}
     
     
     </>)
 }
+
 

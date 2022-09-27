@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from 'react';
-import movieListTemp from "./constants"
+import { getConst } from "./constants"
 import ListMove from './componment';
-import store from './store';
+import store from '../Redux/store';
+
 
 
 export default function App(){
@@ -11,14 +12,15 @@ export default function App(){
         store.subscribe(()=>{
             let temp = [...store.getState().movieList]
             setmovieList(temp)         
-
         })
 
     },[])
 
 
     //temp list, for test, will replace later
-    const [movieList,setmovieList] = useState(movieListTemp)
+    const [movieList,setmovieList] = useState(getConst.movieListTemp)
+
+
 
 
         return(<>
