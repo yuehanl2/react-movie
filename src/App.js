@@ -1,13 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import MovieList from './components/MovieList';
-import LikeList from './components/LikeList';
-import Homepage from './components/Homepage';
+import Homepage from './components/pages/Homepage';
+import MovieList from './components/pages/MovieList';
+import LikeList from './components/pages/LikeList';
+import BlockList from './components/pages/BlockList';
 import Header from './components/Header';
-import BlockList from './components/BlockList';
-
-import { selectMovie } from './actions';
 
 import './App.css';
 
