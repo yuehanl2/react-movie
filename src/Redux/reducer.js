@@ -1,13 +1,14 @@
-import { getConst } from '../constants';
 import { getFunction } from '../utils';
 
 const reducer=(prevState={
 
     // this object will replace with fetch data later
-    movieList:getConst.movieListTemp,
+    movieList:[],
+    wholeList:[],
     actionType:"",
+    curPage:1,
     curState:true,
-    name:"name"
+    isLoading:false
 
 }, action)=>{
 
@@ -41,9 +42,19 @@ const reducer=(prevState={
 
             //add to xx list
             // delete xx list
-        case "DELETELIKE":
+         case "GETFETCH":
+            newState.movieList=action.payload
+            newState.wholeList.push(action.payload)
+            // newState.wholeList[0] = page1 
+            newState.curPage=action.curPage
+            newState.isLoading=false
+            return newState
 
-            return prevState
+        case "GETMOVIE":
+
+            newState.movieList=newState.wholeList[action.curPage-1]      
+
+            return newState
 
         default:
             return prevState
