@@ -1,6 +1,7 @@
 import { getConst } from '../constants';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import React from 'react';
 
 
 export default function LikeList(props) {
